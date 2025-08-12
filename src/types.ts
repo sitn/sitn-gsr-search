@@ -1,9 +1,13 @@
 // GeoJSON type definitions
 export interface GeoJSONFeature {
   type: 'Feature';
+  properties: {
+    [key: string]: any
+  };
   geometry: {
     type: string;
     coordinates: number[] | number[][] | number[][][];
+    srid?: string;
   };
 }
 

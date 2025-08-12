@@ -218,35 +218,21 @@ class SitnGsrSearch extends HTMLElement {
 
       // Update input with selected location
       this.searchInput.value = feature.properties.label;
-      const pointFeature: GeoJSONFeatureCollection = {
+      const intersectFeature: GeoJSONFeatureCollection = {
         type: "FeatureCollection",
         features: [
-          {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: this.calculateBboxCenter(feature),
-            },
-          },
+          feature
         ],
       };
 
       // Call intersection service
-      await this.fetchOfficeInfo(pointFeature);
+      await this.fetchOfficeInfo(intersectFeature);
     } catch (error) {
       console.error("Error handling suggestion click:", error);
       this.showError(
         "Le service d'intersection est hors ligne. Veuillez nous contacter au 032 889 85 02 "
       );
     }
-  }
-
-  private calculateBboxCenter(feature: FTSFeature): [number, number] {
-    const [minX, minY, maxX, maxY] = feature.bbox;
-    const centerX = (minX + maxX) / 2;
-    const centerY = (minY + maxY) / 2;
-
-    return [centerX, centerY];
   }
 
   private async fetchOfficeInfo(

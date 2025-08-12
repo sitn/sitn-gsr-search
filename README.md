@@ -2,9 +2,15 @@
 
 A webcomponent to search GSR
 
+### Getting started
+
+```sh
+npm i
+vite
+```
+
 ### Compile
 
-```
-npm i
+```sh
 vite build
 ```
