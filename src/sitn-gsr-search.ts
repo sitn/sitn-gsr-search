@@ -34,7 +34,7 @@ class SitnGsrSearch extends HTMLElement {
 
     const container = document.createElement("div");
     container.innerHTML = `
-      <div class="search-container">
+      <div class="search-container" aria-label="Rechercher un guichet social régional par commune ou localité">
         <input 
           type="text" 
           id="location-search"
