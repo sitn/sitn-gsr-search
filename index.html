@@ -18,11 +18,145 @@
         font-feature-settings: normal;
         font-variation-settings: normal;
       }
+
+      /**
+      */
+
+      ::before,
+      ::after {
+        --tw-content: "";
+      }
+      .p-0 {
+        padding: 0px;
+      }
+      .rounded-300 {
+        border-radius: var(--radius-300);
+      }
+      .my-0 {
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+
+      @media (min-width: 768px) {
+        .md\:gap-7 {
+          gap: 2rem;
+        }
+      }
+      .bg-neutral-50 {
+        background-color: var(--color-neutral-50);
+      }
+      .overflow-y-hidden {
+        overflow-y: hidden;
+      }
+      .overflow-x-auto {
+        overflow-x: auto;
+      }
+      .gap-6 {
+        gap: 1.5rem;
+      }
+      .items-start {
+        align-items: flex-start;
+      }
+      .flex-col {
+        flex-direction: column;
+      }
+      .h-full {
+        height: 100%;
+      }
+      .flex {
+        display: flex;
+      }
+      .rich_text > *,
+      .rich_text_image > * {
+        margin-bottom: 1.5rem;
+      }
+      *,
+      ::before,
+      ::after {
+        --tw-border-spacing-x: 0;
+        --tw-border-spacing-y: 0;
+        --tw-translate-x: 0;
+        --tw-translate-y: 0;
+        --tw-rotate: 0;
+        --tw-skew-x: 0;
+        --tw-skew-y: 0;
+        --tw-scale-x: 1;
+        --tw-scale-y: 1;
+        --tw-pan-x: ;
+        --tw-pan-y: ;
+        --tw-pinch-zoom: ;
+        --tw-scroll-snap-strictness: proximity;
+        --tw-gradient-from-position: ;
+        --tw-gradient-via-position: ;
+        --tw-gradient-to-position: ;
+        --tw-ordinal: ;
+        --tw-slashed-zero: ;
+        --tw-numeric-figure: ;
+        --tw-numeric-spacing: ;
+        --tw-numeric-fraction: ;
+        --tw-ring-inset: ;
+        --tw-ring-offset-width: 0px;
+        --tw-ring-offset-color: #fff;
+        --tw-ring-color: rgb(59 130 246 / 0.5);
+        --tw-ring-offset-shadow: 0 0 #0000;
+        --tw-ring-shadow: 0 0 #0000;
+        --tw-shadow: 0 0 #0000;
+        --tw-shadow-colored: 0 0 #0000;
+        --tw-blur: ;
+        --tw-brightness: ;
+        --tw-contrast: ;
+        --tw-grayscale: ;
+        --tw-hue-rotate: ;
+        --tw-invert: ;
+        --tw-saturate: ;
+        --tw-sepia: ;
+        --tw-drop-shadow: ;
+        --tw-backdrop-blur: ;
+        --tw-backdrop-brightness: ;
+        --tw-backdrop-contrast: ;
+        --tw-backdrop-grayscale: ;
+        --tw-backdrop-hue-rotate: ;
+        --tw-backdrop-invert: ;
+        --tw-backdrop-opacity: ;
+        --tw-backdrop-saturate: ;
+        --tw-backdrop-sepia: ;
+        --tw-contain-size: ;
+        --tw-contain-layout: ;
+        --tw-contain-paint: ;
+        --tw-contain-style: ;
+      }
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+        border-width: 0;
+        border-style: solid;
+        border-color: currentColor;
+      }
     </style>
   </head>
   <body>
     <div class="demo-container">
-      <sitn-gsr-search></sitn-gsr-search>
+      <section class="rich_text_module">
+        <div class="rich_text rounded-300 p-0 my-0 nech-js-processed">
+          <div
+            aria-label="contenu de la section"
+            class="overflow-x-auto overflow-y-hidden gap-6 md:gap-7 h-full items-start bg-neutral-50 flex flex-col"
+          >
+            <sitn-gsr-search></sitn-gsr-search>
+          </div>
+        </div>
+      </section>
+      <section class="rich_text_module">
+        <div class="rich_text rounded-300 p-0 my-0 nech-js-processed">
+          <div
+            aria-label="contenu de la section"
+            class="overflow-x-auto overflow-y-hidden gap-6 md:gap-7 h-full items-start bg-neutral-50 flex flex-col"
+          >
+        <p>Mais bonjour</p>
+        </div>
+        </div>
+      </section>
     </div>
 
     <script type="module" src="/src/sitn-gsr-search.ts"></script>

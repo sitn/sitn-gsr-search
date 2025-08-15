@@ -44,9 +44,9 @@ class SitnGsrSearch extends HTMLElement {
           spellcheck="false"
         />
         <div class="suggestions-dropdown hidden"></div>
+        <div class="error-message hidden"></div>
+        <div class="office-card hidden"></div>
       </div>
-      <div class="error-message hidden"></div>
-      <div class="office-card hidden"></div>
     `;
 
     this.shadow.appendChild(style);
@@ -171,7 +171,7 @@ class SitnGsrSearch extends HTMLElement {
 
       console.error("Erreur lors de la recherche:", error);
       this.showError(
-        "Une erreur a été rencontrée lors de la recherche, veuillez nous contacter au 032 889 85 02."
+        "Erreur lors de la recherche, veuillez nous contacter au 032 889 85 02."
       );
       this.hideSuggestions();
     }
@@ -230,7 +230,7 @@ class SitnGsrSearch extends HTMLElement {
     } catch (error) {
       console.error("Error handling suggestion click:", error);
       this.showError(
-        "Le service d'intersection est hors ligne. Veuillez nous contacter au 032 889 85 02 "
+        "Aucun guichet trouvé. Veuillez nous contacter au 032 889 85 02 "
       );
     }
   }
