@@ -19,6 +19,7 @@ class SitnGsrSearch extends HTMLElement {
   private officeCard!: HTMLDivElement;
   private errorContainer!: HTMLDivElement;
   private tooltip!: HTMLDivElement;
+  private clearButton!: HTMLButtonElement;
   private searchTimeout: number | null = null;
   private abortController: AbortController | null = null;
 
@@ -46,6 +47,16 @@ class SitnGsrSearch extends HTMLElement {
             spellcheck="false"
             aria-describedby="search-tooltip"
           />
+          <button 
+            type="button" 
+            class="clear-button hidden" 
+            aria-label="Vider le champ de recherche"
+            title="Vider le champ"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+          </button>
           <div 
             id="search-tooltip"
             class="tooltip"
@@ -80,6 +91,9 @@ class SitnGsrSearch extends HTMLElement {
     this.tooltip = this.shadow.querySelector(
       ".tooltip"
     ) as HTMLDivElement;
+    this.clearButton = this.shadow.querySelector(
+      ".clear-button"
+    ) as HTMLButtonElement;
   }
 
   private bindEvents(): void {
@@ -92,7 +106,11 @@ class SitnGsrSearch extends HTMLElement {
       "focus",
       this.handleInputFocus.bind(this)
     );
-
+    // Clear button event
+    this.clearButton.addEventListener(
+      "click",
+      this.handleClearClick.bind(this)
+    );
     // Close dropdown when clicking outside
     document.addEventListener("click", this.handleDocumentClick.bind(this));
   }
@@ -110,6 +128,7 @@ class SitnGsrSearch extends HTMLElement {
     this.hideError();
     this.hideOfficeCard();
     this.updateTooltipVisibility();
+    this.updateClearButtonVisibility();
 
     if (query.length < 3) {
       this.hideSuggestions();
@@ -149,6 +168,25 @@ class SitnGsrSearch extends HTMLElement {
     } else {
       this.tooltip.classList.add("hidden");
     }
+  }
+
+  private updateClearButtonVisibility(): void {
+    const hasValue = this.searchInput.value.trim() !== "";
+    if (hasValue) {
+      this.clearButton.classList.remove("hidden");
+    } else {
+      this.clearButton.classList.add("hidden");
+    }
+  }
+
+  private handleClearClick(): void {
+    this.searchInput.value = "";
+    this.searchInput.focus();
+    this.hideSuggestions();
+    this.hideOfficeCard();
+    this.hideError();
+    this.updateTooltipVisibility();
+    this.updateClearButtonVisibility();
   }
 
   private async performSearch(query: string): Promise<void> {

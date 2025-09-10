@@ -15,6 +15,36 @@
   width: 100%;
 }
 
+.clear-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  width: 24px;
+  height: 24px;
+  z-index: 10;
+}
+
+.clear-button:hover {
+  color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.clear-button:focus {
+  outline: 2px solid #dc3545;
+  outline-offset: 2px;
+}
+
 .tooltip-button {
   position: absolute;
   right: 12px;
