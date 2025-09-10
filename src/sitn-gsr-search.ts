@@ -288,81 +288,68 @@ class SitnGsrSearch extends HTMLElement {
       <h3>${officeInfo.nom_gsr || "Guichet social régional"}</h3>
       <div class="office-info">
         <div class="flex">
-          ${`
-            <div class="info-value">${this.escapeHtml(
-              officeInfo.adresse
-            )}<br>${this.escapeHtml(officeInfo.localite)}</div>
-          `}
-          ${`
-            <div class="info-value">
-              <a href="${this.escapeHtml(
-                  officeInfo.google_maps
-                )}" target="_blank" rel="noopener noreferrer">
-                <span class="icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16" aria-hidden="true">
-                    <path d="M5 8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5z"/>
-                    <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z"/>
-                  </svg>
-                </span>
-                <span class="sr-only">Ouvrir l'itinéraire sur Google Maps</span>
-              </a>
-            </div>
-          `}
+          <div class="info-value">${this.escapeHtml(officeInfo.adresse)}<br>
+            ${this.escapeHtml(officeInfo.localite)}<br>
+          </div>
+          <div class="info-value">
+            <a href="${this.escapeHtml(officeInfo.google_maps)}" target="_blank" rel="noopener noreferrer">
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M5 8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5z"/>
+                  <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z"/>
+                </svg>
+              </span>
+              Itinéraire
+            </a>
+          </div>
         </div>
-        <hr>
-        ${
-          officeInfo.numero_telephone
-            ? `
-          <div class="info-value"> 
-            <a href="tel:${this.escapeHtml(
-              officeInfo.numero_telephone
-            )}"><span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-              <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-              </svg>
-            </span> ${this.escapeHtml(officeInfo.numero_telephone)} </a>
-          </div>
-        `
-            : ""
-        }
-        
-        ${
-          officeInfo.form_prise_contact
-            ? `
-          <div class="info-value">
-            <a href="${this.escapeHtml(
-              officeInfo.form_prise_contact
-            )}" target="_blank" rel="noopener noreferrer">Nous écrire
-              <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
-                  <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
-                </svg>
-              </span>
-            </a>
-          </div>
-        `
-            : ""
-        }
 
-        ${
-          officeInfo.informations
-            ? `
+        <hr>
+
+        <div class="flex">
           <div class="info-value">
-            <a href="${this.escapeHtml(
-              officeInfo.informations
-            )}" target="_blank" rel="noopener noreferrer">Informations et horaires
+            ${this.escapeHtml(officeInfo.numero_telephone)}
+          </div>
+          <div class="info-value">
+            <a href="tel:${this.escapeHtml(officeInfo.numero_telephone)}">
               <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
-                  <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
                 </svg>
+              </span>
+              Appeler
+            </a>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="flex">
+
+          <div class="info-value">
+            <a href="${this.escapeHtml(officeInfo.form_prise_contact)}" target="_blank" rel="noopener noreferrer">
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                </svg>
+                Nous écrire
               </span>
             </a>
           </div>
-        `
-            : ""
-        }
+
+          <div class="info-value">
+            <a href="${this.escapeHtml(officeInfo.informations)}" target="_blank" rel="noopener noreferrer">
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg>
+                Informations et horaires
+              </span>
+            </a>
+          </div>
+
+        </div>
       </div>
     `;
 
@@ -392,7 +379,6 @@ class SitnGsrSearch extends HTMLElement {
     return div.innerHTML;
   }
 
-  // Cleanup when component is removed
   disconnectedCallback(): void {
     if (this.searchTimeout) {
       clearTimeout(this.searchTimeout);
@@ -404,7 +390,6 @@ class SitnGsrSearch extends HTMLElement {
   }
 }
 
-// Register the custom element
 customElements.define("sitn-gsr-search", SitnGsrSearch);
 
 export default SitnGsrSearch;

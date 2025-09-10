@@ -6,8 +6,8 @@
 .search-container {
   position: relative;
   width: 100%;
-  min-width: 20em;
-  min-height: 22em;
+  min-height: 23em;
+  min-width: 22em;
 }
 
 .search-input {
@@ -95,18 +95,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap; /* évite un retour à la ligne */
-  border: 0;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 hr {
@@ -121,6 +111,41 @@ hr {
 .info-value a {
   color: #007c64;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.7rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #007c64;
+  border-radius: 2rem;
+  background-color: transparent;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.info-value a:hover {
+  background-color: #007c64;
+  color: white;
+}
+
+.info-value a:active {
+  transform: translateY(1px);
+}
+
+.info-value a .icon {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-value a .icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .error-message {
@@ -139,10 +164,15 @@ hr {
 
 @media (max-width: 480px) {
   :host {
+    min-width: 100%;
     max-width: 100%;
   }
   
+  .search-container {
+    min-width: 100%;
+  }
+
   .search-input {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
   }
 }
