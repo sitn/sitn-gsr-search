@@ -18,6 +18,7 @@ class SitnGsrSearch extends HTMLElement {
   private suggestionsDropdown!: HTMLDivElement;
   private officeCard!: HTMLDivElement;
   private errorContainer!: HTMLDivElement;
+  private tooltip!: HTMLDivElement;
   private searchTimeout: number | null = null;
   private abortController: AbortController | null = null;
 
@@ -35,14 +36,25 @@ class SitnGsrSearch extends HTMLElement {
     const container = document.createElement("div");
     container.innerHTML = `
       <div class="search-container" aria-label="Rechercher un guichet social régional par commune ou localité">
-        <input 
-          type="text" 
-          id="location-search"
-          class="search-input" 
-          placeholder="Entrez le nom de votre commune ou localité"
-          autocomplete="off"
-          spellcheck="false"
-        />
+        <div class="search-wrapper">
+          <input 
+            type="text" 
+            id="location-search"
+            class="search-input" 
+            placeholder="Entrez le nom de votre commune ou localité"
+            autocomplete="off"
+            spellcheck="false"
+            aria-describedby="search-tooltip"
+          />
+          <div 
+            id="search-tooltip"
+            class="tooltip"
+            role="tooltip"
+            aria-live="polite"
+          >
+            Entrez le nom de votre commune ou localité
+          </div>
+        </div>
         <div class="suggestions-dropdown hidden"></div>
         <div class="error-message hidden"></div>
         <div class="office-card hidden"></div>
@@ -64,6 +76,9 @@ class SitnGsrSearch extends HTMLElement {
     ) as HTMLDivElement;
     this.errorContainer = this.shadow.querySelector(
       ".error-message"
+    ) as HTMLDivElement;
+    this.tooltip = this.shadow.querySelector(
+      ".tooltip"
     ) as HTMLDivElement;
   }
 
@@ -94,6 +109,7 @@ class SitnGsrSearch extends HTMLElement {
     // Hide error and office card when new search starts
     this.hideError();
     this.hideOfficeCard();
+    this.updateTooltipVisibility();
 
     if (query.length < 3) {
       this.hideSuggestions();
@@ -123,6 +139,15 @@ class SitnGsrSearch extends HTMLElement {
   private handleDocumentClick(event: Event): void {
     if (!this.contains(event.target as Node)) {
       this.hideSuggestions();
+    }
+  }
+
+  private updateTooltipVisibility(): void {
+    const isEmpty = this.searchInput.value.trim() === "";
+    if (isEmpty) {
+      this.tooltip.classList.remove("hidden");
+    } else {
+      this.tooltip.classList.add("hidden");
     }
   }
 
