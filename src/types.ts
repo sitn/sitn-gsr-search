@@ -22,9 +22,10 @@ export interface FTSFeature extends GeoJSONFeature {
 export interface GSRFeature extends GeoJSONFeature {
   properties: {
     nom_gsr: string;
-    numero_telephone?: string;
-    email?: string;
-    form_prise_contact?: string;
+    numero_telephone: string;
+    email: string;
+    form_prise_contact: string;
+    informations: string;
     adresse: string;
     google_maps: string;
   }
@@ -51,6 +52,7 @@ export interface OfficeInfo {
   numero_telephone: string;
   email: string;
   form_prise_contact: string;
+  informations: string;
   adresse: string;
   localite: string;
   google_maps: string;

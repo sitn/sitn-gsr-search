@@ -147,11 +147,11 @@ class SitnGsrSearch extends HTMLElement {
 
       const data: FTSSearchResponse = await response.json();
 
-      // Filter results to only show communes. If no communes, show localites
       const filteredFeatures = data.features.filter(
         (feature) =>
           feature.properties.layer_name === "communes" ||
-          feature.properties.layer_name === "localite"
+          feature.properties.layer_name === "localite" ||
+          feature.properties.layer_name === "gsr002_guichet_social_regional"
       );
 
       const onlyCommunesFeatures = filteredFeatures.filter(
@@ -220,9 +220,7 @@ class SitnGsrSearch extends HTMLElement {
       this.searchInput.value = feature.properties.label;
       const intersectFeature: GeoJSONFeatureCollection = {
         type: "FeatureCollection",
-        features: [
-          feature
-        ],
+        features: [feature],
       };
 
       // Call intersection service
@@ -264,11 +262,12 @@ class SitnGsrSearch extends HTMLElement {
   private displayOfficeInfo(feature: GSRFeature): void {
     const properties = feature.properties;
 
-    const officeInfo: Partial<OfficeInfo> = {
+    const officeInfo: OfficeInfo = {
       nom_gsr: properties.nom_gsr || "",
       numero_telephone: properties.numero_telephone || "",
       email: properties.email || "",
       form_prise_contact: properties.form_prise_contact || "",
+      informations: properties.informations || "",
       adresse: properties.adresse.split(" - ")[0] || properties.adresse,
       localite: properties.adresse.split(" - ")[1] || "",
       google_maps: properties.google_maps || "",
@@ -286,16 +285,31 @@ class SitnGsrSearch extends HTMLElement {
     }
 
     this.officeCard.innerHTML = `
-      <h3>${officeInfo.nom_gsr || "Office Information"}</h3>
+      <h3>${officeInfo.nom_gsr || "Guichet social régional"}</h3>
       <div class="office-info">
-        ${
-          officeInfo.adresse && officeInfo.localite
-            ? `
-          <div class="info-value">${this.escapeHtml(officeInfo.adresse)}<br>${this.escapeHtml(officeInfo.localite)}</div>
-        `
-            : ""
-        }
-        
+        <div class="flex">
+          ${`
+            <div class="info-value">${this.escapeHtml(
+              officeInfo.adresse
+            )}<br>${this.escapeHtml(officeInfo.localite)}</div>
+          `}
+          ${`
+            <div class="info-value">
+              <a href="${this.escapeHtml(
+                  officeInfo.google_maps
+                )}" target="_blank" rel="noopener noreferrer">
+                <span class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-sign-turn-right" viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M5 8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5z"/>
+                    <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134Z"/>
+                  </svg>
+                </span>
+                <span class="sr-only">Ouvrir l'itinéraire sur Google Maps</span>
+              </a>
+            </div>
+          `}
+        </div>
+        <hr>
         ${
           officeInfo.numero_telephone
             ? `
@@ -330,20 +344,21 @@ class SitnGsrSearch extends HTMLElement {
         `
             : ""
         }
-        
+
         ${
-          officeInfo.google_maps
+          officeInfo.informations
             ? `
           <div class="info-value">
             <a href="${this.escapeHtml(
-              officeInfo.google_maps
-            )}" target="_blank" rel="noopener noreferrer">Itinéraire
-            <span class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
-                <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
-              </svg></a>
-            </span>
+              officeInfo.informations
+            )}" target="_blank" rel="noopener noreferrer">Informations et horaires
+              <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+                  <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+                </svg>
+              </span>
+            </a>
           </div>
         `
             : ""
