@@ -6,7 +6,6 @@
 .search-container {
   position: relative;
   width: 100%;
-  min-height: 23em;
   min-width: 22em;
 }
 
@@ -119,11 +118,17 @@
   padding-inline-start: 1rem;
   border: 1px solid #007c64;
   background-color: whitesmoke;
-  border-radius: 2rem;
+  border-radius: 1.5rem;
   font-size: 1em;
-  transition: border-color 150ms ease;
+  transition: border-radius 150ms ease;
+  transition: width 2s;
   box-sizing: border-box;
   outline: none;
+}
+
+.search-input.suggested {
+  border-radius: 1.5rem 1.5rem 0 0;
+  transition: border-radius 150ms ease;
 }
 
 .search-input::placeholder {
@@ -135,17 +140,11 @@
 }
 
 .suggestions-dropdown {
-  position: absolute;
-  top: 1em;
-  padding-top: 2em;
-  left: 0;
-  right: 0;
-  border-top: none;
   border-radius: 0 0 1rem 1rem;
   max-height: 200px;
   overflow-y: auto;
-  z-index: 1000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5em;
 }
 
 .suggestion-item {

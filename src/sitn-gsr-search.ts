@@ -9,7 +9,7 @@ import type {
   GSRFeature,
 } from "./types";
 
-const SEARCH_URL = "https://sitn.ne.ch/search?partitionlimit=2&query=";
+const SEARCH_URL = "https://sitn.ne.ch/search?partitionlimit=10&limit=1000&query=";
 const INTERSECTION_URL = "https://sitn.ne.ch/apps/action_sociale/intersection";
 
 class SitnGsrSearch extends HTMLElement {
@@ -243,14 +243,14 @@ class SitnGsrSearch extends HTMLElement {
   private showLoading(): void {
     this.suggestionsDropdown.innerHTML =
       '<div class="loading">Recherche en cours...</div>';
-    this.suggestionsDropdown.classList.remove("hidden");
+    this.showSuggestions();
   }
 
   private displaySuggestions(features: FTSFeature[]): void {
     if (features.length === 0) {
       this.suggestionsDropdown.innerHTML =
-        '<div class="no-results">Cette commune ou localité n\'existe pas</div>';
-      this.suggestionsDropdown.classList.remove("hidden");
+        '<div class="no-results">Cette commune ou localité n\'existe pas dans le canton de Neuchâtel</div>';
+      this.showSuggestions();
       return;
     }
 
@@ -271,7 +271,7 @@ class SitnGsrSearch extends HTMLElement {
       this.suggestionsDropdown.appendChild(item);
     });
 
-    this.suggestionsDropdown.classList.remove("hidden");
+    this.showSuggestions();
   }
 
   private async handleSuggestionClick(feature: FTSFeature): Promise<void> {
@@ -419,8 +419,14 @@ class SitnGsrSearch extends HTMLElement {
     this.officeCard.classList.remove("hidden");
   }
 
+  private showSuggestions() {
+    this.suggestionsDropdown.classList.remove("hidden");
+    this.searchInput.classList.add("suggested");
+  }
+
   private hideSuggestions(): void {
     this.suggestionsDropdown.classList.add("hidden");
+    this.searchInput.classList.remove("suggested");
   }
 
   private hideOfficeCard(): void {
