@@ -282,13 +282,21 @@ hr {
     padding-right: 48px;
   }
 
-  .search-input::placeholder {
-    color: transparent;
-  }
-
   .tooltip {
     left: 12px;
     right: 12px;
     display: block;
+  }
+}
+
+@media (max-width: 380px) {
+  .search-input::placeholder {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .search-input::placeholder {
+    font-size: 12px;
   }
 }
