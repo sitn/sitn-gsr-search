@@ -12,5 +12,5 @@ npx vite
 ### Compile
 
 ```sh
-vite build
+npx vite build
 ```
