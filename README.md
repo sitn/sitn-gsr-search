@@ -6,7 +6,7 @@ A webcomponent to search GSR
 
 ```sh
 npm i
-vite
+npx vite
 ```
 
 ### Compile
