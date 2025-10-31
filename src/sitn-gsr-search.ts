@@ -42,7 +42,7 @@ class SitnGsrSearch extends HTMLElement {
             type="text" 
             id="location-search"
             class="search-input" 
-            placeholder="Entrez le nom de votre commune ou localité"
+            placeholder="Indiquez votre commune, localité ou NPA"
             autocomplete="off"
             spellcheck="false"
             aria-describedby="search-tooltip"
@@ -217,15 +217,8 @@ class SitnGsrSearch extends HTMLElement {
           feature.properties.layer_name === "gsr002_guichet_social_regional"
       );
 
-      const onlyCommunesFeatures = filteredFeatures.filter(
-        (feature) => feature.properties.layer_name === "communes"
-      );
+      this.displaySuggestions(filteredFeatures);
 
-      if (onlyCommunesFeatures.length === 0) {
-        this.displaySuggestions(filteredFeatures);
-      } else {
-        this.displaySuggestions(onlyCommunesFeatures);
-      }
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
         // Request was cancelled, ignore
