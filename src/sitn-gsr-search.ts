@@ -214,7 +214,9 @@ class SitnGsrSearch extends HTMLElement {
         (feature) =>
           feature.properties.layer_name === "communes" ||
           feature.properties.layer_name === "localite" ||
-          feature.properties.layer_name === "gsr002_guichet_social_regional"
+          feature.properties.layer_name === "gsr002_guichet_social_regional" ||
+          (feature.properties.layer_name === "nom_local_lieu_dit" &&
+            feature.properties.label.includes("Tène"))
       );
 
       this.displaySuggestions(filteredFeatures);
