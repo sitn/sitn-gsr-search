@@ -56,6 +56,7 @@ export interface OfficeInfo {
   adresse: string;
   localite: string;
   google_maps: string;
+  demande: string;
 }
 
 // Search suggestion for dropdown

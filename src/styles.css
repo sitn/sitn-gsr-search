@@ -251,6 +251,11 @@ hr {
 .info-value a .icon svg {
   width: 24px;
   height: 24px;
+  flex-shrink: 0;
+}
+
+.info-value.full-width a {
+  white-space: normal;
 }
 
 .error-message {
@@ -299,4 +304,15 @@ hr {
   .search-input::placeholder {
     font-size: 12px;
   }
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

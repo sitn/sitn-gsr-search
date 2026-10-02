@@ -329,10 +329,12 @@ class SitnGsrSearch extends HTMLElement {
       adresse: properties.adresse.split(" - ")[0] || properties.adresse,
       localite: properties.adresse.split(" - ")[1] || "",
       google_maps: properties.google_maps || "",
+      demande:
+        "https://enquetesv4.ne.ch/SurveyServer/s/SASOPub/eFormulaireDPS/questionnaire.htm",
     };
 
-    const hasValidInfo = Object.values(officeInfo).some(
-      (value) => value && value.trim() !== ""
+    const hasValidInfo = Object.entries(officeInfo).some(
+      ([key, value]) => key !== "demande" && value && value.trim() !== ""
     );
 
     if (!hasValidInfo) {
@@ -407,6 +409,21 @@ class SitnGsrSearch extends HTMLElement {
             </a>
           </div>
 
+        </div>
+
+        <hr>
+
+        <div class="info-value full-width">
+          <a href="${this.escapeHtml(officeInfo.demande)}" target="_blank" rel="noopener noreferrer external">
+            <span class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+                <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+              </svg>
+              Déposer une demande de prestation sociale
+            </span>
+            <span class="visually-hidden">(ouvre un site externe dans un nouvel onglet)</span>
+          </a>
         </div>
       </div>
     `;
